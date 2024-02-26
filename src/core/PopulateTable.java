@@ -10,8 +10,7 @@ public class PopulateTable {
 
     public static List<Table> createTable(int totalPageToGenerate, DataClassReadFile file){
 
-        List<Table> v = new ArrayList<>(totalPageToGenerate);
-        List<String> r = new ArrayList<>();
+        List<Table> vTable = new ArrayList<>(totalPageToGenerate);
 
         /*
            limites de controle para sempre
@@ -23,23 +22,24 @@ public class PopulateTable {
 
         for(int i = 0 ; i < totalPageToGenerate ; i+=1){
 
-                v.add(new Table());
+                vTable.add(new Table());
 
                 /*
                     logica da list<?> r e para montar as palavras dentro de
                     paginas de 100 registros
                  */
 
+                List<String> tmp = new ArrayList<>();
                 for(int j = lowerBound ; j < upperBound ; j+=1){
-                    r.add(file.getElementsRead().get(j));
+                    tmp.add(file.getElementsRead().get(j));
                 }
 
-                lowerBound = upperBound+1;
+                lowerBound = upperBound;
                 upperBound += 100;
 
-                v.get(i).setElements(r);
+                vTable.get(i).setElements(tmp);
         }
-        return v;
+        return vTable;
     }
 
 }
