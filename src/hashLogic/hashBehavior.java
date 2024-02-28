@@ -20,4 +20,7 @@ public class hashBehavior {
 
     }
 
+    //bucket quantity e a quantidade de buckets que foram gerados
+    //para limitar o
+
 }

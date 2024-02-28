@@ -5,18 +5,17 @@ import java.util.List;
 
 public class Bucket {
 
-    HashMap<Integer, String> buckets = new HashMap<>();
+    HashMap<Integer, HashMap<String, Integer>> buckets;
 
     public Bucket(){
-
+       buckets = new HashMap<>();
     }
 
-    public HashMap<Integer, String> getBuckets() {
+    public HashMap<Integer, HashMap<String, Integer>> getBuckets() {
         return buckets;
     }
 
-    public void setBuckets(HashMap<Integer, String> buckets) {
+    public void setBuckets(HashMap<Integer, HashMap<String, Integer>> buckets) {
         this.buckets = buckets;
     }
-
 }
