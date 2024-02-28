@@ -1,5 +1,6 @@
 package core;
 
+import BucketLogic.CoreLogicForBucket;
 import model.Table;
 import utils.DataClassReadFile;
 import utils.ReadFileUtils;
@@ -10,6 +11,7 @@ import java.util.Scanner;
 public class CoreLogic {
 
     private final ReadFileUtils fl = new ReadFileUtils();
+    private final CoreLogicForBucket bk = new CoreLogicForBucket();
     private final Scanner sc = new Scanner(System.in);
     private int pageByPages;
 
@@ -21,6 +23,7 @@ public class CoreLogic {
         int pageInformByUser = sc.nextInt();
         pageByPages = (dataClassReadFile.getNumberLineRead()/pageInformByUser);
         List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
+        bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table);
 
     }
 
