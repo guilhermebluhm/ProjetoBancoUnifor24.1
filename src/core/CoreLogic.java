@@ -20,8 +20,10 @@ public class CoreLogic {
     public void behavior(){
 
         DataClassReadFile dataClassReadFile = fl.readData();
-        System.out.println("informe a quantidade de registros por pagina: ");
-        int pageInformByUser = sc.nextInt();
+
+        //System.out.println("informe a quantidade de registros por pagina: ");
+        //int pageInformByUser = sc.nextInt();
+        int pageInformByUser = 100;
         pageByPages = (dataClassReadFile.getNumberLineRead()/pageInformByUser);
 
 
@@ -31,6 +33,8 @@ public class CoreLogic {
         System.out.println();
         System.out.println("Criando indices ...");
         bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets);
+
+        System.out.println("End ...");
     }
 
 }
