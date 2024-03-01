@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Bucket {
 
     public Bucket(int v){
        buckets = new HashMap<>();
-       buckets.put(v, null);
+       buckets.put(v, new ArrayList<>());
     }
 
     public HashMap<Integer, List<String>> getBuckets() {
