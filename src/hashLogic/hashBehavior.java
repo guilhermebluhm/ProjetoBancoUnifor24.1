@@ -17,7 +17,6 @@ public class hashBehavior {
         hash *= 2.7182818284;
         hash %= bucketQuantity;
         return hash;
-
     }
 
     //bucket quantity e a quantidade de buckets que foram gerados

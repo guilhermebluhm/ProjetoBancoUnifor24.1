@@ -12,6 +12,8 @@ public class PopulateTable {
 
         List<Table> vTable = new ArrayList<>(totalPageToGenerate);
 
+
+
         /*
            limites de controle para sempre
            pegar novos registros a serem inseridos na tabela
@@ -24,14 +26,12 @@ public class PopulateTable {
 
                 vTable.add(new Table());
 
-                /*
-                    logica da list<?> r e para montar as palavras dentro de
-                    paginas de 100 registros
-                 */
+                // adicionar na tabela e adicionar no bus=ket
 
                 List<String> tmp = new ArrayList<>();
                 for(int j = lowerBound ; j < upperBound ; j+=1){
                     tmp.add(file.getElementsRead().get(j));
+
                 }
 
                 lowerBound = upperBound;

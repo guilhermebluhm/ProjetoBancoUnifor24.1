@@ -6,6 +6,5 @@ public class Main {
 
             CoreLogic core = new CoreLogic();
             core.behavior();
-
         }
 }

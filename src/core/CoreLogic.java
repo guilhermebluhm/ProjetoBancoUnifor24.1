@@ -23,9 +23,14 @@ public class CoreLogic {
         System.out.println("informe a quantidade de registros por pagina: ");
         int pageInformByUser = sc.nextInt();
         pageByPages = (dataClassReadFile.getNumberLineRead()/pageInformByUser);
-        List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
-        bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets);
 
+
+        System.out.println("Criando paginas ...");
+        List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
+
+        System.out.println();
+        System.out.println("Criando indices ...");
+        bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets);
     }
 
 }
