@@ -2,6 +2,7 @@ package BucketLogic;
 
 import hashLogic.hashBehavior;
 import model.Bucket;
+import model.BucketAndOverflow;
 import model.BucketOverflowType;
 import model.Table;
 import utils.ConnectBucketWhenOverflowOccurence;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CoreLogicForBucket {
 
@@ -19,7 +19,7 @@ public class CoreLogicForBucket {
     private ConnectBucketWhenOverflowOccurence oc = new ConnectBucketWhenOverflowOccurence();
 
 
-    public ArrayList<Bucket> behaviorBucket(int numberCreatedRegistry, List<Table> lTable, int rBucket){
+    public BucketAndOverflow behaviorBucket(int numberCreatedRegistry, List<Table> lTable, int rBucket){
 
         ArrayList<Bucket> buckets = new ArrayList<>(numberCreatedRegistry / rBucket);
         for(int i = 0 ; i < numberCreatedRegistry / rBucket ; i+=1){
@@ -39,13 +39,14 @@ public class CoreLogicForBucket {
                         else{
                             String valueToInsert = lTable.get(i).getElements().get(j);
                             bucket.getBuckets().get(hash).add(valueToInsert);
-                            System.out.println(bucket);
                         }
                     }
                 }
+                else{
+                    throw new RuntimeException("null bucket");
+                }
             }
-            System.out.println("bucket");
         }
-        return buckets;
+        return new BucketAndOverflow(buckets, overflowBucket);
     }
 }

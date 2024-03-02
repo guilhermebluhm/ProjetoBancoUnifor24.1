@@ -2,6 +2,7 @@ package core;
 
 import BucketLogic.CoreLogicForBucket;
 import model.Bucket;
+import model.BucketAndOverflow;
 import model.Table;
 import utils.DataClassReadFile;
 import utils.ReadFileUtils;
@@ -21,9 +22,7 @@ public class CoreLogic {
     private int pageByPages;
 
 
-    public void behavior(){
-
-        int z = 0;
+    public BucketAndOverflow behavior(){
 
         DataClassReadFile dataClassReadFile = fl.readData();
         System.out.println("informe a quantidade de registros por pagina: ");
@@ -31,13 +30,6 @@ public class CoreLogic {
         pageByPages = (dataClassReadFile.getNumberLineRead()/pageInformByUser);
 
         List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
-        ArrayList<Bucket> buckets = bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets);
-/*        for(int i = 0 ; i < buckets.size() ; i+=1){
-            List<String> values = buckets.get(i).getBuckets().values().stream().flatMap(Collection::stream).collect(Collectors.toList());
-            if(values.isEmpty())
-                z+=1;
-        }
-        System.out.println(z);*/
+        return bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets);
     }
-
 }
