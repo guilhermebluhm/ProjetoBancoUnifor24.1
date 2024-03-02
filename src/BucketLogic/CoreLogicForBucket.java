@@ -2,18 +2,22 @@ package BucketLogic;
 
 import hashLogic.hashBehavior;
 import model.Bucket;
+import model.BucketOverflowType;
 import model.Table;
 import utils.ConnectBucketWhenOverflowOccurence;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CoreLogicForBucket {
 
-    List<Integer> hashPositionByElement = new ArrayList<>();
-    ConnectBucketWhenOverflowOccurence oc = new ConnectBucketWhenOverflowOccurence();
+
+    private final HashMap<String, BucketOverflowType> overflowBucket = new HashMap<>();
+    private ConnectBucketWhenOverflowOccurence oc = new ConnectBucketWhenOverflowOccurence();
+
 
     public ArrayList<Bucket> behaviorBucket(int numberCreatedRegistry, List<Table> lTable, int rBucket){
 
@@ -29,9 +33,8 @@ public class CoreLogicForBucket {
                 if(bucket != null){
                     if(bucket.getBuckets().containsKey(hash)){
                         if(bucket.getBuckets().values().stream().flatMap(Collection::stream).toList().size() == 4){
-                            int keyFromThisBucket = (int) bucket.getBuckets().keySet().toArray()[0];
-                            System.out.println(keyFromThisBucket);
-                            //oc.addLogic(keyFromThisBucket,lTable.get(i).getElements().get(j));
+                            Integer keyFromThisBucket = (Integer) bucket.getBuckets().keySet().toArray()[0];
+                            oc.addLogic(keyFromThisBucket.toString(),lTable.get(i).getElements().get(j), overflowBucket);
                         }
                         else{
                             String valueToInsert = lTable.get(i).getElements().get(j);

@@ -7,16 +7,16 @@ import java.util.UUID;
 
 public class BucketOverflowType {
 
-    HashMap<UUID, List<String>> buckets;
+    HashMap<String, List<String>> buckets;
 
-    public BucketOverflowType(UUID uid, String v) {
+    public BucketOverflowType(String uid, String v) {
         buckets = new HashMap<>();
         List<String> listObjectForBucketOverflow = new ArrayList<>();
         listObjectForBucketOverflow.add(v);
         buckets.put(uid, listObjectForBucketOverflow);
     }
 
-    public HashMap<UUID, List<String>> getBuckets() {
+    public HashMap<String, List<String>> getBuckets() {
         return buckets;
     }
 }
