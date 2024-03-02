@@ -36,8 +36,6 @@ public class ConnectBucketWhenOverflowOccurence {
                 next.getBuckets().values().add(collect);
             }
         }
-
         overflowBucket.put(v,new BucketOverflowType(UUID.randomUUID(),s));
     }
-
 }

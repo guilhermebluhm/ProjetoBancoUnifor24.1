@@ -6,7 +6,9 @@ import model.Table;
 import utils.ConnectBucketWhenOverflowOccurence;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CoreLogicForBucket {
 
@@ -26,13 +28,15 @@ public class CoreLogicForBucket {
                 Bucket bucket = buckets.get(hash);
                 if(bucket != null){
                     if(bucket.getBuckets().containsKey(hash)){
-                        if(bucket.getBuckets().values().size() > 4){
+                        if(bucket.getBuckets().values().stream().flatMap(Collection::stream).toList().size() == 4){
                             int keyFromThisBucket = (int) bucket.getBuckets().keySet().toArray()[0];
-                            oc.addLogic(keyFromThisBucket,lTable.get(i).getElements().get(j));
+                            System.out.println(keyFromThisBucket);
+                            //oc.addLogic(keyFromThisBucket,lTable.get(i).getElements().get(j));
                         }
                         else{
                             String valueToInsert = lTable.get(i).getElements().get(j);
                             bucket.getBuckets().get(hash).add(valueToInsert);
+                            System.out.println(bucket);
                         }
                     }
                 }
