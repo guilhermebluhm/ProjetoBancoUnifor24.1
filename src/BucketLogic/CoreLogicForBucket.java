@@ -1,6 +1,6 @@
 package BucketLogic;
 
-import hashLogic.hashBehavior;
+import hashLogic.HashBehavior;
 import model.Bucket;
 import model.BucketAndOverflow;
 import model.BucketOverflowType;
@@ -28,7 +28,7 @@ public class CoreLogicForBucket {
 
         for(int i = 0 ; i < lTable.size() ; i+=1){
             for(int j = 0 ; j < 100 ; j+=1){
-                int hash = hashBehavior.hash(lTable.get(i).getElements().get(j), buckets.size());
+                int hash = HashBehavior.hash(lTable.get(i).getElements().get(j), buckets.size());
                 Bucket bucket = buckets.get(hash);
                 if(bucket != null){
                     if(bucket.getBuckets().containsKey(hash)){

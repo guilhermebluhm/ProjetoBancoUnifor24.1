@@ -1,11 +1,8 @@
 import core.CoreLogic;
-import model.Bucket;
 import model.BucketAndOverflow;
-import model.BucketOverflowType;
 import utils.SearchLogic;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Scanner;
 
 public class Main {
 
@@ -20,5 +17,6 @@ public class Main {
             System.out.println("qual bucket quer localizar: ");
             bckSeach = sc.nextLine();
             src.searchBehaviour(behavior,bckSeach);
+
         }
 }
