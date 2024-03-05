@@ -31,7 +31,6 @@ public class PopulateTable {
                 List<String> tmp = new ArrayList<>();
                 for(int j = lowerBound ; j < upperBound ; j+=1){
                     tmp.add(file.getElementsRead().get(j));
-
                 }
 
                 lowerBound = upperBound;
@@ -39,6 +38,7 @@ public class PopulateTable {
 
                 vTable.get(i).setElements(tmp);
         }
+        System.out.println((upperBound-100) + " Elementos criados");
         return vTable;
     }
 

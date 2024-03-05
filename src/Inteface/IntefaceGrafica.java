@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 
 public class IntefaceGrafica {
@@ -52,6 +53,7 @@ public class IntefaceGrafica {
                 String texto = textField.getText();
                 if (!texto.isEmpty()) {
                     int page = core.search(texto);
+                    model.setRowCount(0);
                     model.addRow(new Object[]{texto});
                     textField.setText("");
 
@@ -68,6 +70,26 @@ public class IntefaceGrafica {
                     dialog.setVisible(true);
 
                 }
+            }
+        });
+
+
+        tableScanButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                textField.setText("");
+                List<String> results = core.scan();
+                model.setRowCount(0);
+
+                for(String word: results) model.addRow(new Object[]{word});
+
+                String label = results.size() + " Resultados encontrados.";
+
+                final JDialog dialog = new JDialog(frame, "Busca Concluida", true);
+                dialog.setLayout(new FlowLayout());
+                dialog.add(new JLabel(label));
+                dialog.setSize(300, 150);
+                dialog.setLocationRelativeTo(frame);
+                dialog.setVisible(true);
             }
         });
 

@@ -5,6 +5,7 @@ import model.Table;
 import utils.DataClassReadFile;
 import utils.ReadFileUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -57,5 +58,18 @@ public class CoreLogic {
     public String[] tableScan() {
 
         return new String[0];
+    }
+
+    public List<String> scan() {
+        List<String> results = new ArrayList<String>();
+        for(Table t: table){
+            List<String> elements = t.getElements();
+            for(String word: elements){
+                results.add(word);
+            }
+        }
+
+        System.out.println(results.size() + " Elementos encontrados");
+        return results;
     }
 }

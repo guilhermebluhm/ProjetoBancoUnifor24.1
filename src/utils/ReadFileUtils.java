@@ -5,6 +5,7 @@ import dataFile.FindPath;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ReadFileUtils {
 
@@ -14,13 +15,17 @@ public class ReadFileUtils {
 
     public DataClassReadFile readData(){
 
-        try{
-            rd = new BufferedReader(new FileReader(FindPath.getPath()));
-            while(rd.readLine() != null){
-                tmpFileData.add(rd.readLine());
+        try {
+            File myObj = new File(FindPath.getPath());
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                tmpFileData.add(data);
                 countLinesInFile+=1;
             }
-        } catch (IOException e) {
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
             throw new RuntimeException(e);
         }
 
