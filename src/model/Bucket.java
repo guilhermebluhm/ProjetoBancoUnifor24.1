@@ -30,16 +30,10 @@ public class Bucket {
 
     public void add(HashMap<String, Integer> indice){
         indices[size] = indice;
+        size += 1;
     }
     public HashMap<String, Integer>[] getIndices() {
         return indices;
     }
-    public HashMap<String, Integer> find(String word){
-        for(int i = 0; i < size; i++){
-            if( indices[i].containsKey(word) ) {
-                return indices[i];
-            }
-        }
-        return overflow.find(word);
-    }
+
 }

@@ -11,58 +11,82 @@ import java.awt.event.ActionListener;
 
 public class IntefaceGrafica {
 
-        public static void main(String[] args) {
-            CoreLogic core = new CoreLogic();
-            core.behavior();
+    private static CoreLogic core;
 
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    criarGUI();
-                }
-            });
-        }
+    public void run(CoreLogic core) {
+        this.core = core;
 
-        public static void criarGUI() {
-            JFrame frame = new JFrame("Tabela com Input");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setLayout(new BorderLayout());
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                criarGUI();
+            }
+        });
+    }
 
-
-            JPanel panel = new JPanel();
-            panel.setLayout(new FlowLayout());
-
-            // Cria o input de texto
-            JTextField textField = new JTextField(40);
-            panel.add(textField);
-
-            // Cria o botão
-            JButton addButton = new JButton("Buscar na Tabela");
-
-            // Cria a tabela
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("Word");
-            JTable table = new JTable(model);
+    public static void criarGUI() {
+        JFrame frame = new JFrame("Tabela com Input");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
 
 
-            // Adiciona um listener ao botão para adicionar o texto na tabela
-            addButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    String texto = textField.getText();
-                    if (!texto.isEmpty()) {
-                        model.addRow(new Object[]{texto});
-                        textField.setText(""); // Limpa o campo de entrada após adicionar
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+
+        // Cria o input de texto
+        JTextField textField = new JTextField(40);
+        panel.add(textField);
+
+        // Cria os botões
+        JButton addButton = new JButton("Buscar na Tabela");
+        JButton tableScanButton = new JButton("Table Scan");
+
+        // Cria a tabela
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Word");
+        JTable table = new JTable(model);
+
+
+        // Adiciona um listener ao botão para adicionar o texto na tabela
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String texto = textField.getText();
+                if (!texto.isEmpty()) {
+                    int page = core.search(texto);
+                    model.addRow(new Object[]{texto});
+                    textField.setText("");
+
+                    String label = "Palavra encontrada na pagina: " + page;
+                    if(page == -1){
+                        label = "Não foi possível encontrar a pagina";
                     }
+
+                    final JDialog dialog = new JDialog(frame, "Resultado de Busca", true);
+                    dialog.setLayout(new FlowLayout());
+                    dialog.add(new JLabel(label));
+                    dialog.setSize(300, 150);
+                    dialog.setLocationRelativeTo(frame);
+                    dialog.setVisible(true);
+
                 }
-            });
+            }
+        });
 
-            // Adiciona os componentes ao painel
-            panel.add(addButton);
-            frame.add(panel, BorderLayout.NORTH);
-            frame.add(new JScrollPane(table), BorderLayout.CENTER);
+        // Adiciona um listener ao botão de table scan
+        tableScanButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String[] res = core.tableScan();
+            }
+        });
 
-            // Configura o tamanho do frame e exibe-o
-            frame.setSize(1000, 600);
-            frame.setVisible(true);
-        }
+        // Adiciona os componentes ao painel
+        panel.add(addButton);
+        panel.add(tableScanButton);
+        frame.add(panel, BorderLayout.NORTH);
+        frame.add(new JScrollPane(table), BorderLayout.CENTER);
+
+        // Configura o tamanho do frame e exibe-o
+        frame.setSize(1000, 600);
+        frame.setVisible(true);
+    }
 }
 

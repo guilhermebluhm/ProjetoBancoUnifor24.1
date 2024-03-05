@@ -15,6 +15,7 @@ public class CoreLogic {
     private final CoreLogicForBucket bk = new CoreLogicForBucket();
     private final Scanner sc = new Scanner(System.in);
     private int pageByPages;
+    private List<Table> table;
 
 
     public void behavior(){
@@ -29,6 +30,7 @@ public class CoreLogic {
 
         System.out.println("Criando paginas ...");
         List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
+        this.table = table;
 
         System.out.println();
         System.out.println("Criando indices ...");
@@ -37,4 +39,23 @@ public class CoreLogic {
         System.out.println("End ...");
     }
 
+    public int search(String word) {
+        int page = bk.getIndice(word);
+        if(page == -1){
+            return page;
+        }
+
+        if(table != null){
+            for(String element: table.get(page).getElements()){
+                if(element.equals(word)) return page;
+            };
+        }
+
+        return -1;
+    }
+
+    public String[] tableScan() {
+
+        return new String[0];
+    }
 }
