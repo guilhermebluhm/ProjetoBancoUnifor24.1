@@ -1,17 +1,13 @@
 package core;
 
 import BucketLogic.CoreLogicForBucket;
-import model.Bucket;
 import model.BucketAndOverflow;
 import model.Table;
 import utils.DataClassReadFile;
 import utils.ReadFileUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class CoreLogic {
 
@@ -29,7 +25,7 @@ public class CoreLogic {
         int pageInformByUser = sc.nextInt();
         pageByPages = (dataClassReadFile.getNumberLineRead()/pageInformByUser);
 
-        List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
-        return bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets);
+        List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile, pageInformByUser);
+        return bk.behaviorBucket(dataClassReadFile.getNumberLineRead(), table, registryByBuckets, pageInformByUser);
     }
 }

@@ -1,47 +1,48 @@
 package utils;
 
+import hashLogic.HashBehavior;
 import model.Bucket;
 import model.BucketAndOverflow;
 import model.BucketOverflowType;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SearchLogic {
 
     public void searchBehaviour(BucketAndOverflow behavior, String bckSeach){
-        for(Bucket bck : behavior.getBuckets()){
 
-            List<String> bucketregtryLevel0 = bck.getBuckets().values().stream().flatMap(Collection::stream).toList();
-            if(bucketregtryLevel0.contains(bckSeach)){
-                if(bucketregtryLevel0.size() == 4) {
-                    BucketOverflowType bucketOverflowTypeLevel1 = behavior.getOverflowType()
-                            .get(String
-                                    .valueOf((int) bck
-                                            .getBuckets()
-                                            .keySet()
-                                            .toArray()[0]));
-                    if(bucketOverflowTypeLevel1 != null){
-                        BucketOverflowType bucketOverflowTypeLevel2 = behavior
-                                .getOverflowType()
-                                .get((bucketOverflowTypeLevel1.getBuckets().keySet().toArray()[0]).toString());
-                        if(bucketOverflowTypeLevel2 != null) {
-                            System.out.println("overflow de nivel 2");
-                            System.out.println(bucketOverflowTypeLevel2);
-                            //quando ha 2 niveis de overflow
+        int hash = HashBehavior.hash(bckSeach, behavior.getBuckets().size());
+        Bucket bucket = behavior.getBuckets().get(hash);
+        List<String> bckElements = bucket.getBuckets().get(hash);
+
+        if(bckElements.size() == 4) {
+            for (String v : bckElements) {
+                if (v.contains(bckSeach)) {
+                    System.out.println("sim, o registro esta no bucket");
+                    BucketOverflowType bucketOverflowType = behavior
+                            .getOverflowType()
+                            .get(bucket
+                                    .getBuckets()
+                                    .keySet()
+                                    .toArray()[0]
+                                    .toString()
+                            );
+                    if(bucketOverflowType != null){
+                        if(bucketOverflowType.getBuckets().values().stream().toList().size() == 4){
+                            System.out.println("overflow nivel 2 - nao implementado");
+                        }
+                        else {
+                            System.out.println("overflow nivel 1");
                             break;
                         }
-                        //quando ha 1 nivel de overflow
-                        break;
                     }
-                }
-                else{
-                    //quando o bucket nunca lotou 4 casas
-                    System.out.println(bucketregtryLevel0);
-                    break;
                 }
             }
         }
+        else{
+            System.out.println("somente nivel 0");
+        }
     }
-
 }

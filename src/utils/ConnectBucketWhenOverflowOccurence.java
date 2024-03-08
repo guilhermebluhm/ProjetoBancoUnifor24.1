@@ -11,17 +11,6 @@ public class ConnectBucketWhenOverflowOccurence {
     public void addLogic(String v, String s, HashMap<String, BucketOverflowType> overflowBucket){
 
         /*
-            logica de aninhamento dos buckets sera baseado em arvore
-            o primeiro bucket criado será com base no ID gerado pelo bucket
-            que acumulou 4 registros, então o overflow passará a apontar para aquele
-            ID.
-
-            todos os overflow deverao contar com um UUID para indicar sua unicidade
-            caso um overflow gere um outro overflow seu id será ao UUID daquele que o criou
-            e assim por diante
-         */
-
-        /*
             falta a parte das estatisticas de colisao e overflow
          */
 

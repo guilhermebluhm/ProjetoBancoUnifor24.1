@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PopulateTable {
 
-    public static List<Table> createTable(int totalPageToGenerate, DataClassReadFile file){
+    public static List<Table> createTable(int totalPageToGenerate, DataClassReadFile file, Integer registryByUser){
 
         List<Table> vTable = new ArrayList<>(totalPageToGenerate);
 
@@ -18,7 +18,7 @@ public class PopulateTable {
          */
 
         int lowerBound = 0;
-        int upperBound = 100;
+        int upperBound = registryByUser;
 
         for(int i = 0 ; i < totalPageToGenerate ; i+=1){
 
@@ -35,7 +35,7 @@ public class PopulateTable {
                 }
 
                 lowerBound = upperBound;
-                upperBound += 100;
+                upperBound += registryByUser;
 
                 vTable.get(i).setElements(tmp);
         }

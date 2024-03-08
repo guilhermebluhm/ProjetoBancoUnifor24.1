@@ -19,7 +19,7 @@ public class CoreLogicForBucket {
     private ConnectBucketWhenOverflowOccurence oc = new ConnectBucketWhenOverflowOccurence();
 
 
-    public BucketAndOverflow behaviorBucket(int numberCreatedRegistry, List<Table> lTable, int rBucket){
+    public BucketAndOverflow behaviorBucket(int numberCreatedRegistry, List<Table> lTable, int rBucket, int registry){
 
         ArrayList<Bucket> buckets = new ArrayList<>(numberCreatedRegistry / rBucket);
         for(int i = 0 ; i < numberCreatedRegistry / rBucket ; i+=1){
@@ -27,7 +27,7 @@ public class CoreLogicForBucket {
         }
 
         for(int i = 0 ; i < lTable.size() ; i+=1){
-            for(int j = 0 ; j < 100 ; j+=1){
+            for(int j = 0 ; j < registry ; j+=1){
                 int hash = HashBehavior.hash(lTable.get(i).getElements().get(j), buckets.size());
                 Bucket bucket = buckets.get(hash);
                 if(bucket != null){
