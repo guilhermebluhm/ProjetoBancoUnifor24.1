@@ -53,7 +53,7 @@ public class CoreLogicForBucket {
 
         System.out.println("Estatisticas");
         System.out.printf("Total de bukets normais: %d / %d\n", tBukets, buckets.size());
-        System.out.printf("Qnt Bukets em overflow: %d / %d\n", tBuketsOverflow, tBuketsOverflow+buckets.size());
+        System.out.printf("Qnt Bukets em overflow: %d\n", tBuketsOverflow);
         System.out.println("Palavra em overflow: " + overflows);
     }
 

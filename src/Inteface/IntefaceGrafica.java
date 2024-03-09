@@ -107,7 +107,7 @@ public class IntefaceGrafica {
         frame.add(new JScrollPane(table), BorderLayout.CENTER);
 
         // Configura o tamanho do frame e exibe-o
-        frame.setSize(1000, 600);
+        frame.setSize(800, 600);
         frame.setVisible(true);
     }
 }
