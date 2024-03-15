@@ -57,7 +57,7 @@ public class IntefaceGrafica {
                     model.addRow(new Object[]{texto});
                     textField.setText("");
 
-                    String label = "Palavra encontrada na pagina: " + page;
+                    String label = "Palavra encontrada na pagina: " + page+1;
                     if(page == -1){
                         label = "Não foi possível encontrar a pagina";
                     }

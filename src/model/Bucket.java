@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Bucket {
+    private Bucket overflow;
+    private int size;
+    private HashMap<String, Integer>[] indices;
+
+
     public Bucket getOverflow() {
         return overflow;
     }
@@ -11,20 +16,15 @@ public class Bucket {
     public void setOverflow(Bucket overflow) {
         this.overflow = overflow;
     }
-
-    private Bucket overflow;
-    private int size;
-
     public int getSize() {
         return size;
     }
 
 
 
-    private HashMap<String, Integer>[] indices;
 
     public Bucket(){
-       indices = new HashMap[4];
+       indices = new HashMap[6];
        size = 0;
     }
 

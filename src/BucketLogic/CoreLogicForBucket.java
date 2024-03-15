@@ -18,7 +18,7 @@ public class CoreLogicForBucket {
         buckets = new ArrayList<>(numberCreatedRegistry / rBucket);
 
         for(int i = 0 ; i < numberCreatedRegistry / rBucket ; i+=1){
-            buckets.add(new BuketTable());
+            buckets.add(new BuketTable(rBucket));
         }
 
         int page = 0;

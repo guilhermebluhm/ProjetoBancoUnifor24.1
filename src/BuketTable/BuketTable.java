@@ -5,14 +5,16 @@ import model.Bucket;
 import java.util.HashMap;
 
 public class BuketTable {
+    int registryByBuckets;
     private int overflowBukets;
     private int overflowSize;
     private Bucket bucket;
 
 
-    public BuketTable(){
+    public BuketTable(int registryByBuckets){
         overflowSize = 0;
         overflowBukets = 0;
+        this.registryByBuckets = registryByBuckets;
     }
 
     public int getOverflowBukets() {
@@ -45,11 +47,11 @@ public class BuketTable {
             Bucket newBucket = new Bucket();
             newBucket.add(indice);
             bucket = newBucket;
-        }else if(bucket.getSize() == 4){
+        }else if(bucket.getSize() == registryByBuckets){
             Bucket currentBuket = bucket;
             overflowSize += 1;
             do{
-                if(currentBuket.getSize() < 4){
+                if(currentBuket.getSize() < registryByBuckets){
                     currentBuket.add(indice);
                     break;
                 }else if(currentBuket.getOverflow() == null){
@@ -96,9 +98,9 @@ public class BuketTable {
             } else {
                 return -1;
             }
-
             count++;
         }
+
         for(HashMap<String, Integer> indice: indices){
             if(indice.containsKey(word)){
                 return indice.get(word);

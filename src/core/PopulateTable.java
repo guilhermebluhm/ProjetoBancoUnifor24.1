@@ -8,19 +8,13 @@ import java.util.List;
 
 public class PopulateTable {
 
-    public static List<Table> createTable(int totalPageToGenerate, DataClassReadFile file){
+    public static List<Table> createTable(int totalPageToGenerate, DataClassReadFile file, int pageSize){
 
         List<Table> vTable = new ArrayList<>(totalPageToGenerate);
 
 
-
-        /*
-           limites de controle para sempre
-           pegar novos registros a serem inseridos na tabela
-         */
-
         int lowerBound = 0;
-        int upperBound = 100;
+        int upperBound = pageSize;
 
         for(int i = 0 ; i < totalPageToGenerate ; i+=1){
 
@@ -34,11 +28,11 @@ public class PopulateTable {
                 }
 
                 lowerBound = upperBound;
-                upperBound += 100;
+                upperBound += pageSize;
 
                 vTable.get(i).setElements(tmp);
         }
-        System.out.println((upperBound-100) + " Elementos criados");
+        System.out.println((upperBound-pageSize) + " Elementos criados");
         return vTable;
     }
 

@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class CoreLogic {
 
-    private final int registryByBuckets = 4;
+    private final int registryByBuckets = 6;
     private final ReadFileUtils fl = new ReadFileUtils();
     private final CoreLogicForBucket bk = new CoreLogicForBucket();
     private final Scanner sc = new Scanner(System.in);
@@ -23,14 +23,13 @@ public class CoreLogic {
 
         DataClassReadFile dataClassReadFile = fl.readData();
 
-        //System.out.println("informe a quantidade de registros por pagina: ");
-        //int pageInformByUser = sc.nextInt();
-        int pageInformByUser = 100;
+        System.out.println("informe a quantidade de registros por pagina: ");
+        int pageInformByUser = sc.nextInt();
         pageByPages = (dataClassReadFile.getNumberLineRead()/pageInformByUser);
 
 
         System.out.println("Criando paginas ...");
-        List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile);
+        List<Table> table = PopulateTable.createTable(pageByPages, dataClassReadFile, pageInformByUser);
         this.table = table;
 
         System.out.println();
