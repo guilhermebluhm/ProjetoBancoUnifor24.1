@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class CoreLogic {
 
-    private final int registryByBuckets = 6;
+    private final int registryByBuckets = 8;
     private final ReadFileUtils fl = new ReadFileUtils();
     private final CoreLogicForBucket bk = new CoreLogicForBucket();
     private final Scanner sc = new Scanner(System.in);
@@ -47,7 +47,10 @@ public class CoreLogic {
 
         if(table != null){
             for(String element: table.get(page).getElements()){
-                if(element.equals(word)) return page;
+                if(element.equals(word)){
+                    System.out.println("Custo: " + 1);
+                    return page+1;
+                }
             };
         }
 
@@ -60,8 +63,11 @@ public class CoreLogic {
     }
 
     public List<String> scan() {
+
+        short custo = 0;
         List<String> results = new ArrayList<String>();
         for(Table t: table){
+            custo += 1;
             List<String> elements = t.getElements();
             for(String word: elements){
                 results.add(word);
@@ -69,6 +75,7 @@ public class CoreLogic {
         }
 
         System.out.println(results.size() + " Elementos encontrados");
+        System.out.println("Custo: " + custo);
         return results;
     }
 }

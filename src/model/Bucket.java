@@ -9,6 +9,13 @@ public class Bucket {
     private HashMap<String, Integer>[] indices;
 
 
+
+    public Bucket(int rBucket){
+        indices = new HashMap[rBucket];
+        size = 0;
+    }
+
+
     public Bucket getOverflow() {
         return overflow;
     }
@@ -20,13 +27,6 @@ public class Bucket {
         return size;
     }
 
-
-
-
-    public Bucket(){
-       indices = new HashMap[6];
-       size = 0;
-    }
 
     public void add(HashMap<String, Integer> indice){
         indices[size] = indice;

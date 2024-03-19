@@ -11,10 +11,11 @@ import java.util.List;
 
 public class CoreLogicForBucket {
     private ArrayList<BuketTable> buckets;
+    private int numberCreatedRegistry;
 
 
     public void behaviorBucket(int numberCreatedRegistry, List<Table> lTable, int rBucket){
-
+        this.numberCreatedRegistry = numberCreatedRegistry;
         buckets = new ArrayList<>(numberCreatedRegistry / rBucket);
 
         for(int i = 0 ; i < numberCreatedRegistry / rBucket ; i+=1){
@@ -52,9 +53,16 @@ public class CoreLogicForBucket {
         }
 
         System.out.println("Estatisticas");
-        System.out.printf("Total de bukets normais: %d / %d\n", tBukets, buckets.size());
+        System.out.printf("Total de bukets preenchidos: %d / %d\n", tBukets, buckets.size());
+        System.out.println();
+
         System.out.printf("Qnt Bukets em overflow: %d\n", tBuketsOverflow);
-        System.out.println("Palavra em overflow: " + overflows);
+        System.out.printf("Taxa de colisão: %f\n", tBuketsOverflow/((double) tBukets));
+        System.out.println();
+
+        System.out.println("Qnt de overflow: " + overflows);
+        System.out.println("Taxa de overflow: " + overflows/(float)numberCreatedRegistry);
+        System.out.println();
     }
 
     public int getIndice(String word){

@@ -44,7 +44,7 @@ public class BuketTable {
     public Bucket add(HashMap<String, Integer> indice){
 
         if(bucket == null){
-            Bucket newBucket = new Bucket();
+            Bucket newBucket = new Bucket(registryByBuckets);
             newBucket.add(indice);
             bucket = newBucket;
         }else if(bucket.getSize() == registryByBuckets){
@@ -55,7 +55,7 @@ public class BuketTable {
                     currentBuket.add(indice);
                     break;
                 }else if(currentBuket.getOverflow() == null){
-                    Bucket newBucket = new Bucket();
+                    Bucket newBucket = new Bucket(registryByBuckets);
                     newBucket.add(indice);
                     currentBuket.setOverflow(newBucket);
                     overflowBukets += 1;
